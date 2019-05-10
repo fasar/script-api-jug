@@ -4,7 +4,8 @@
       "token": "nop",
       "host": "api.github.com",
       "port": 443,
-      "ssl": true
+      "ssl": true,
+      "noConnect" : false
     }
   }
 }

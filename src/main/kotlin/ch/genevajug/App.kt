@@ -16,7 +16,7 @@ fun main(args: Array<String>) {
 
     val vertx = Vertx.vertx();
 
-    var retriever = ConfigRetriever.create(vertx)
+    var retriever = ConfigRetriever.create(vertx, retrieverOptions)
     var configFuture = Future.future<JsonObject>()
     retriever.getConfig { ar ->
         if (ar.succeeded()) {
@@ -29,12 +29,15 @@ fun main(args: Array<String>) {
     val myConfig = configFuture.map {
         it.getJsonObject("config").mapTo(MyConfig::class.java)
     }
+
+
     myConfig.compose { myConf ->
         val githToken = myConf.github.token
         println("Got token: $githToken")
 
-        val githubTools = GithubTools(githToken, vertx)
+        val githubTools = GithubTools(myConf.github, vertx)
         githubTools.getUser()
+
     }.setHandler { ar ->
         if (ar.failed()) {
             println("Can't use API because : ${ar.cause().message}")

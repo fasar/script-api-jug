@@ -59,4 +59,4 @@ hs_err_pid*
 
 
 # Special configuration with passwords
-conf/config.json
+conf/application.json
