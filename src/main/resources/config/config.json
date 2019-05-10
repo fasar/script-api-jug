@@ -1,0 +1,10 @@
+{
+  "config": {
+    "github": {
+      "token": "nop",
+      "host": "api.github.com",
+      "port": 443,
+      "ssl": true
+    }
+  }
+}
