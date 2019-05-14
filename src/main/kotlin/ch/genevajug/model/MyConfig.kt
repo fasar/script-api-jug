@@ -1,6 +1,4 @@
-package ch.genevajug
-
-import com.fasterxml.jackson.annotation.JsonProperty
+package ch.genevajug.model
 
 data class MyConfig(
         var github: GithubConfig
@@ -8,10 +6,12 @@ data class MyConfig(
 
 data class GithubConfig (
         var token: String,
+        val owner: String,
+        val repo: String,
         var host: String,
         var port: Int,
         var ssl: Boolean,
-        val noConnect: Boolean
+        val disableConnexion: Boolean
 ){}
 
 

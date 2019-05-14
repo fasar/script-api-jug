@@ -3,50 +3,68 @@
  */
 package ch.genevajug
 
-import com.fasterxml.jackson.module.kotlin.registerKotlinModule
+import ch.genevajug.model.MyConfig
 import io.vertx.config.ConfigRetriever
+import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Vertx
-import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
+import org.slf4j.LoggerFactory.getLogger
+
+object App {
+    @JvmStatic
+    private val LOG = getLogger(App::javaClass.name)
 
 
-fun main(args: Array<String>) {
-    Json.mapper.registerKotlinModule()
+    @JvmStatic
+    fun main(args: Array<String>) {
+        masterInit()
 
-    val vertx = Vertx.vertx();
+        val vertx = Vertx.vertx();
 
-    var retriever = ConfigRetriever.create(vertx, retrieverOptions)
-    var configFuture = Future.future<JsonObject>()
-    retriever.getConfig { ar ->
+        var retriever = ConfigRetriever.create(vertx, retrieverOptions)
+        var configFuture = Future.future<JsonObject>()
+        retriever.getConfig { ar ->
+            if (ar.succeeded()) {
+                configFuture.complete(ar.result())
+            } else {
+                configFuture.fail(ar.cause())
+            }
+        }
+
+        val myConfig = configFuture.map {
+            val myConf = it.getJsonObject("config").mapTo(MyConfig::class.java)
+            val githToken = myConf.github.token
+            LOG.info("Got token: $githToken")
+            GithubTools(myConf.github, vertx)
+        }
+
+        // Get User
+//        myConfig.compose { githubTools ->
+//            githubTools.getUser()
+//        }.setHandler { ar ->
+//            printRest(ar)
+//        }
+
+        // Get Pages Status
+        myConfig.compose { githubTools ->
+            githubTools.buildPagesStatus()
+        }.setHandler { ar ->
+            printRest(ar)
+            vertx.close()
+        }
+
+    }
+
+    private fun printRest(ar: AsyncResult<*>) {
         if (ar.succeeded()) {
-            configFuture.complete(ar.result())
+            LOG.info("Success to get api result on Github:\n  ${ar.result()}")
         } else {
-            configFuture.fail(ar.cause())
-        }
-    }
-
-    val myConfig = configFuture.map {
-        it.getJsonObject("config").mapTo(MyConfig::class.java)
-    }
-
-
-    myConfig.compose { myConf ->
-        val githToken = myConf.github.token
-        println("Got token: $githToken")
-
-        val githubTools = GithubTools(myConf.github, vertx)
-        githubTools.getUser()
-
-    }.setHandler { ar ->
-        if (ar.failed()) {
-            println("Can't use API because : ${ar.cause().message}")
+            LOG.error("Can't use API because : ${ar.cause().message}")
             ar.cause().printStackTrace()
-        } else {
-            println("Success to get the User on Github: ${ar.result()}")
         }
-        vertx.close()
     }
+
 
 }
 

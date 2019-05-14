@@ -2,10 +2,13 @@
   "config": {
     "github": {
       "token": "nop",
-      "host": "api.github.com",
-      "port": 443,
+      "owner": "nop",
+      "repo": "nop",
+
       "ssl": true,
-      "noConnect" : false
+      "disable_connexion": false,
+      "host": "api.github.com",
+      "port": 443
     }
   }
 }
