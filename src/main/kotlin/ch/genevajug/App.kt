@@ -3,12 +3,14 @@
  */
 package ch.genevajug
 
+import ch.genevajug.http.HttpVerticle
 import ch.genevajug.model.MyConfig
 import io.vertx.config.ConfigRetriever
 import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
+import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine
 import org.slf4j.LoggerFactory.getLogger
 
 object App {
@@ -21,6 +23,9 @@ object App {
         masterInit()
 
         val vertx = Vertx.vertx();
+
+        vertx.deployVerticle(HttpVerticle())
+
 
         var retriever = ConfigRetriever.create(vertx, retrieverOptions)
         var configFuture = Future.future<JsonObject>()
@@ -47,12 +52,12 @@ object App {
 //        }
 
         // Get Pages Status
-        myConfig.compose { githubTools ->
-            githubTools.buildPagesStatus()
-        }.setHandler { ar ->
-            printRest(ar)
-            vertx.close()
-        }
+//        myConfig.compose { githubTools ->
+//            githubTools.buildPagesStatus()
+//        }.setHandler { ar ->
+//            printRest(ar)
+//            vertx.close()
+//        }
 
     }
 

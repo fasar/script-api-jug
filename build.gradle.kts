@@ -42,12 +42,14 @@ dependencies {
     implementation("io.quarkus:quarkus-resteasy:0.14.0")
     implementation("io.vertx:vertx-web-client:3.7.0")
     implementation("io.vertx:vertx-config:3.7.0")
-    implementation("io.vertx:vertx-rx-java2:3.7.0")
+    implementation("io.vertx:vertx-web:3.7.0")
+    implementation("io.vertx:vertx-web-templ-thymeleaf:3.7.0")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
 
     // Use the Kotlin test library and JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
+    testCompile("io.vertx:vertx-unit:3.7.0")
     testCompile("io.quarkus:quarkus-junit5:0.14.0")
     testCompile("io.rest-assured:rest-assured:3.3.0")
 }
