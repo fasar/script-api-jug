@@ -26,3 +26,10 @@ Create a file conf/application.json
 
 And you can go with the application.
 
+
+## Developping mode
+
+When you are in dev mode, you can add these options to VM to disable the caching system:
+
+* -Dvertxweb.environment=dev -Dvertx.disableFileCaching=true
+

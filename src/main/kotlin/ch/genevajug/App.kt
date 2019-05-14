@@ -20,6 +20,7 @@ object App {
 
     @JvmStatic
     fun main(args: Array<String>) {
+        System.setProperty("io.vertx.ext.web.TemplateEngine.disableCache", "true")
         masterInit()
 
         val vertx = Vertx.vertx();
