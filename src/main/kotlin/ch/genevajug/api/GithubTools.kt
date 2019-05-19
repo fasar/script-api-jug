@@ -1,6 +1,7 @@
-package ch.genevajug
+package ch.genevajug.api
 
 import ch.genevajub.MyException
+import ch.genevajug.App
 import ch.genevajug.model.GithubConfig
 import ch.genevajug.model.PagesBuildRes
 import ch.genevajug.model.UserRes
@@ -21,7 +22,7 @@ class GithubTools(
 ) {
     companion object {
         @JvmStatic
-        private val LOG = LoggerFactory.getLogger(ch.genevajug.App::javaClass.name)
+        private val LOG = LoggerFactory.getLogger(App::javaClass.name)
     }
 
     private var mapper: ObjectMapper

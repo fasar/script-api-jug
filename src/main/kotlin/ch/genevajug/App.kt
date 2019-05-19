@@ -3,6 +3,9 @@
  */
 package ch.genevajug
 
+import ch.genevajug.api.GithubTools
+import ch.genevajug.api.GithubVerticle
+import ch.genevajug.config.ConfigVerticle
 import ch.genevajug.http.HttpVerticle
 import ch.genevajug.model.MyConfig
 import io.vertx.config.ConfigRetriever
@@ -10,7 +13,6 @@ import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
-import io.vertx.ext.web.templ.thymeleaf.ThymeleafTemplateEngine
 import org.slf4j.LoggerFactory.getLogger
 
 object App {
@@ -25,7 +27,15 @@ object App {
 
         val vertx = Vertx.vertx();
 
-        vertx.deployVerticle(HttpVerticle())
+        vertx.deployVerticle(ConfigVerticle()) {
+            if(it.succeeded()) {
+                LOG.info("Deploy Config Vertx Done")
+                vertx.deployVerticle(GithubVerticle())
+                vertx.deployVerticle(HttpVerticle())
+            } else {
+                LOG.error("Can't deploy Config Vertx")
+            }
+        }
 
 
         var retriever = ConfigRetriever.create(vertx, retrieverOptions)
@@ -37,22 +47,22 @@ object App {
                 configFuture.fail(ar.cause())
             }
         }
-
-        val myConfig = configFuture.map {
-            val myConf = it.getJsonObject("config").mapTo(MyConfig::class.java)
-            val githToken = myConf.github.token
-            LOG.info("Got token: $githToken")
-            GithubTools(myConf.github, vertx)
-        }
-
-        // Get User
+//
+//        val myConfig = configFuture.map {
+//            val myConf = it.getJsonObject("config").mapTo(MyConfig::class.java)
+//            val githToken = myConf.github.token
+//            LOG.info("Got token: $githToken")
+//            GithubTools(myConf.github, vertx)
+//        }
+//
+//        // Get User
 //        myConfig.compose { githubTools ->
 //            githubTools.getUser()
 //        }.setHandler { ar ->
 //            printRest(ar)
 //        }
-
-        // Get Pages Status
+//
+//        // Get Pages Status
 //        myConfig.compose { githubTools ->
 //            githubTools.buildPagesStatus()
 //        }.setHandler { ar ->
