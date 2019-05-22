@@ -1,8 +1,6 @@
 package ch.genevajug.http
 
 import io.vertx.core.AbstractVerticle
-import io.vertx.core.Future
-import io.vertx.core.http.HttpHeaders
 import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.handler.StaticHandler
@@ -24,18 +22,14 @@ class HttpVerticle() : AbstractVerticle() {
         val eventBus = vertx.eventBus()
 
         val router = Router.router(vertx)
-        router.errorHandler(500){ routingCtx ->
-            engine.render(JsonObject(routingCtx.data()), "templates/error.html") {
-                if (it.succeeded()) {
-                    val response = routingCtx.response()
-                    response.putHeader(HttpHeaders.CONTENT_TYPE, "text/html")
-                    response.statusCode = 500
-                    response.end(it.result())
-                } else {
-                    LOGGER.error(it.cause().message, it.cause())
-                }
-            }
+        HttpFaillure.register(router, engine)
+        GithubWebApi.register(router, eventBus)
+
+
+        router.route("/github/user.error").handler {
+            throw RuntimeException("Remove Me")
         }
+
         router.route("/github/user.html")
                 .handler { routingCtx ->
                     eventBus.send<JsonObject>("github.user", null) {
@@ -51,20 +45,15 @@ class HttpVerticle() : AbstractVerticle() {
                         }
                     }
                 }
-        router.route("/github/user.error").handler {
-            throw RuntimeException("Remove Me")
-        }
-        router.route("/*")
-                .handler {
-                    it.put("name", "iii2")
-                    it.next()
-                }
+
+        router.get("/*")
                 .handler(StaticHandler.create("static"))
                 .handler(thymeleafRender)
 
         server.requestHandler(router)
         server.listen(80)
     }
+
 
 
 }
