@@ -20,7 +20,6 @@ class ConfigVerticle : AbstractVerticle() {
     override fun start() {
         val eventBus = vertx.eventBus()
 
-
         var configFuture = Future.future<JsonObject>()
         var retriever = ConfigRetriever.create(vertx, retrieverOptions)
         retriever.getConfig { ar ->
@@ -36,9 +35,11 @@ class ConfigVerticle : AbstractVerticle() {
                 val myConf = it.result().getJsonObject("config").mapTo(MyConfig::class.java)
 
                 eventBus.consumer<Any>("config") { message ->
-                    LOG.info("someone get the configuration ${it.result()}")
-                    message.reply(myConf)
+                    LOG.info("someone ask the configuration ${it.result()}")
+                    val mapFrom = JsonObject.mapFrom(myConf)
+                    message.reply(mapFrom)
                 }
+                eventBus.publish("init.config", JsonObject().put("result", true))
             } else {
                 LOG.info("Can't get the configuration {}", it.cause().message, it.cause())
             }

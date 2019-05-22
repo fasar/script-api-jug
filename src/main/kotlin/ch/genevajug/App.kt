@@ -3,13 +3,10 @@
  */
 package ch.genevajug
 
-import ch.genevajug.api.GithubTools
-import ch.genevajug.api.GithubVerticle
+import ch.genevajug.github.services.GithubVerticle
 import ch.genevajug.config.ConfigVerticle
 import ch.genevajug.http.HttpVerticle
-import ch.genevajug.model.MyConfig
 import io.vertx.config.ConfigRetriever
-import io.vertx.core.AsyncResult
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.core.json.JsonObject
@@ -27,16 +24,14 @@ object App {
 
         val vertx = Vertx.vertx();
 
-        vertx.deployVerticle(ConfigVerticle()) {
-            if(it.succeeded()) {
-                LOG.info("Deploy Config Vertx Done")
-                vertx.deployVerticle(GithubVerticle())
-                vertx.deployVerticle(HttpVerticle())
-            } else {
-                LOG.error("Can't deploy Config Vertx")
-            }
-        }
+        vertx.deployVerticle(ConfigVerticle())
 
+        val eventBus = vertx.eventBus()
+        eventBus.consumer<JsonObject>("init.config").handler {
+            LOG.info("Deploy Config Vertx Done")
+            vertx.deployVerticle(GithubVerticle())
+            vertx.deployVerticle(HttpVerticle())
+        }
 
         var retriever = ConfigRetriever.create(vertx, retrieverOptions)
         var configFuture = Future.future<JsonObject>()
@@ -47,39 +42,11 @@ object App {
                 configFuture.fail(ar.cause())
             }
         }
-//
-//        val myConfig = configFuture.map {
-//            val myConf = it.getJsonObject("config").mapTo(MyConfig::class.java)
-//            val githToken = myConf.github.token
-//            LOG.info("Got token: $githToken")
-//            GithubTools(myConf.github, vertx)
-//        }
-//
-//        // Get User
-//        myConfig.compose { githubTools ->
-//            githubTools.getUser()
-//        }.setHandler { ar ->
-//            printRest(ar)
-//        }
-//
-//        // Get Pages Status
-//        myConfig.compose { githubTools ->
-//            githubTools.buildPagesStatus()
-//        }.setHandler { ar ->
-//            printRest(ar)
-//            vertx.close()
-//        }
+
 
     }
 
-    private fun printRest(ar: AsyncResult<*>) {
-        if (ar.succeeded()) {
-            LOG.info("Success to get api result on Github:\n  ${ar.result()}")
-        } else {
-            LOG.error("Can't use API because : ${ar.cause().message}")
-            ar.cause().printStackTrace()
-        }
-    }
+
 
 
 }

@@ -1,9 +1,6 @@
-package ch.genevajug.model
+package ch.genevajug.github.model
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
-import com.fasterxml.jackson.annotation.JsonInclude
-import com.fasterxml.jackson.databind.JsonDeserializer
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 import java.time.Instant
 
 enum class StatusRes {
@@ -15,14 +12,14 @@ data class ErrorBuildRes (
 ){}
 
 data class PagesBuildRes(
-    var url: String,
-    var status: StatusRes,
-    var error: ErrorBuildRes,
-    var commit: String,
-    var duration: Int,
-    var createdAt: Instant,
-    var updatedAt: Instant,
-    var pusher: UserRes
+        var url: String,
+        var status: StatusRes,
+        var error: ErrorBuildRes,
+        var commit: String,
+        var duration: Int,
+        var createdAt: Instant,
+        var updatedAt: Instant,
+        var pusher: UserRes
 ){}
 
 @JsonIgnoreProperties(ignoreUnknown = true)

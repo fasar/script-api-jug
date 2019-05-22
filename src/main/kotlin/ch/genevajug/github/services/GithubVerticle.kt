@@ -1,9 +1,10 @@
-package ch.genevajug.api
+package ch.genevajug.github.services
 
-import ch.genevajug.App
 import ch.genevajug.model.MyConfig
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
+import io.vertx.core.eventbus.EventBus
+import io.vertx.core.eventbus.Message
 import io.vertx.core.json.JsonObject
 import org.slf4j.LoggerFactory
 
@@ -31,20 +32,41 @@ class GithubVerticle : AbstractVerticle() {
         configuration.map {
             val githToken = it.github.token
             LOG.info("Got token: $githToken")
-            GithubTools(it.github, vertx)
+            GithubToolsMock(it.github, vertx)
         }.map {
-            eventBus.consumer<Any>("github.user", { message ->
-                message.reply(it.getUser())
-            })
-            eventBus.consumer<Any>("github.build-pages-status", { message ->
-                message.reply(it.buildPagesStatus())
-            })
-
+            registerOnEventBus(eventBus, it)
             it
         }
 
+    }
 
+    private fun registerOnEventBus(eventBus: EventBus, githubTools: GithubToolsMock) {
+        eventBus.consumer<JsonObject>("github.user", {
+            answereFun(it) { githubTools.getUser()}
+        })
+        eventBus.consumer<Any>("github.build-pages-status", {
+            answereFun(it) { githubTools.buildPagesStatus()}
+        })
+    }
 
+    fun answereFun(message: Message<*>, mapper: () -> Future<*>)  {
+        val myFuture = mapper()
+        myFuture.map {
+            mapSuccess(it, message)
+        }.recover {
+            mapFail(message, it)
+        }
+    }
+
+    private fun mapFail(message: Message<*>, it: Throwable?): Future<Future<Any>?>? {
+        message.reply(null)
+        return Future.failedFuture(it)
+    }
+
+    private fun mapSuccess(it: Any?, message: Message<*>): Future<Any>? {
+        val res = JsonObject.mapFrom(it)
+        message.reply(res)
+        return Future.succeededFuture(it)
     }
 
 

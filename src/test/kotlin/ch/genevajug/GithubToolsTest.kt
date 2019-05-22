@@ -1,7 +1,6 @@
 package ch.genevajug
 
-import ch.genevajug.model.ErrorBuildRes
-import ch.genevajug.model.PagesBuildRes
+import ch.genevajug.github.model.PagesBuildRes
 import io.vertx.core.json.Json
 import org.junit.jupiter.api.Test
 

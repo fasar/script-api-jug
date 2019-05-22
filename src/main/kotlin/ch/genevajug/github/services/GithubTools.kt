@@ -1,10 +1,10 @@
-package ch.genevajug.api
+package ch.genevajug.github.services
 
 import ch.genevajub.MyException
 import ch.genevajug.App
 import ch.genevajug.model.GithubConfig
-import ch.genevajug.model.PagesBuildRes
-import ch.genevajug.model.UserRes
+import ch.genevajug.github.model.PagesBuildRes
+import ch.genevajug.github.model.UserRes
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.vertx.core.Future
 import io.vertx.core.Vertx
@@ -16,7 +16,7 @@ import io.vertx.ext.web.client.WebClientOptions
 import io.vertx.ext.web.client.WebClientSession
 import org.slf4j.LoggerFactory
 
-class GithubTools(
+open class GithubTools(
         private val githubConf: GithubConfig,
         vertx: Vertx
 ) {

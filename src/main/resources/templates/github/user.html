@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+<div class="content">
+    <h1>Geneva - Jug - GitHub User</h1>
+    <div class="body">So good</div>
+
+    <h2>Git Hub User  s</h2>
+
+    Hello <span th:text="${name}">my name</span><br>
+    Hello2 <span th:text="${name2}">my name</span><br>
+    Login <span th:text="${githubUser}" >ok</span>
+
+    <br>&nbsp;<br>
+
+    <div th:inline="javascript">
+    var app = new Vue({
+        el: '#app',
+        data: {
+            project: /*[[${githubUser}]]*/ {}
+        }
+        and name is [[ ${name} ]]
+        and name is [[ ${name2} ]]
+    });
+    </div>
+</div>
+
+</body>
+</html>
