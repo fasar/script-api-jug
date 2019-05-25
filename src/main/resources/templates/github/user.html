@@ -17,20 +17,10 @@
 
     Hello <span th:text="${name}">my name</span><br>
     Hello2 <span th:text="${name2}">my name</span><br>
-    Login <span th:text="${githubUser}" >ok</span>
+    Login <span th:text="${guser}" >ok</span>
 
-    <br>&nbsp;<br>
+    Login <span th:text="${guser.getString('login')}" >ok</span>
 
-    <div th:inline="javascript">
-    var app = new Vue({
-        el: '#app',
-        data: {
-            project: /*[[${githubUser}]]*/ {}
-        }
-        and name is [[ ${name} ]]
-        and name is [[ ${name2} ]]
-    });
-    </div>
 </div>
 
 </body>
