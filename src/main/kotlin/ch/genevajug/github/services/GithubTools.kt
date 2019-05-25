@@ -2,9 +2,9 @@ package ch.genevajug.github.services
 
 import ch.genevajub.MyException
 import ch.genevajug.App
-import ch.genevajug.model.GithubConfig
 import ch.genevajug.github.model.PagesBuildRes
 import ch.genevajug.github.model.UserRes
+import ch.genevajug.model.GithubConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import io.vertx.core.Future
 import io.vertx.core.Vertx
@@ -28,6 +28,8 @@ open class GithubTools(
     private var mapper: ObjectMapper
     val session: WebClientSession
 
+    private var userBuffer: Future<UserRes>? = null
+
     init {
         val webOptions = WebClientOptions()
         webOptions.setSsl(true)
@@ -44,9 +46,10 @@ open class GithubTools(
 
 
     fun getUser(): Future<UserRes> {
-        val apiPath = "/user"
-        return getObject(apiPath, UserRes::class.java)
-
+        if (userBuffer == null) {
+            userBuffer = getObject("/user", UserRes::class.java)
+        }
+        return userBuffer!!
     }
 
     fun buildPagesStatus(): Future<Array<PagesBuildRes>> {
@@ -58,14 +61,13 @@ open class GithubTools(
     }
 
 
-
     private fun <T> getObject(apiPath: String, clazz: Class<T>): Future<T> {
         return getAndMap(apiPath, { it.bodyAsJsonObject().mapTo(clazz) })
     }
 
 
     private fun <T> getAndMap(apiPath: String, mapper: (HttpResponse<Buffer>) -> (T)): Future<T> {
-        var resFuture = Future.future<T>()
+        val resFuture = Future.future<T>()
         if (githubConf.disableConnexion) {
             resFuture.fail(MyException("Disable connexion set to true in the configuration"))
         } else {
@@ -74,7 +76,7 @@ open class GithubTools(
                     .send { ar ->
                         if (ar.succeeded()) {
                             // Obtain response
-                            var response = ar.result()
+                            val response = ar.result()
                             LOG.debug("Received response with status code ${response.statusCode()}")
                             val body = response.bodyAsString()
                             LOG.debug("Received response body $body")
@@ -98,7 +100,7 @@ open class GithubTools(
                         }
                     }
         }
-        return resFuture;
+        return resFuture
     }
 
 }
