@@ -5,7 +5,6 @@ package ch.genevajug
 
 import ch.genevajug.github.services.GithubVerticle
 import ch.genevajug.config.ConfigVerticle
-import ch.genevajug.http.GithubWebApi
 import ch.genevajug.http.HttpVerticle
 import io.vertx.config.ConfigRetriever
 import io.vertx.core.Future

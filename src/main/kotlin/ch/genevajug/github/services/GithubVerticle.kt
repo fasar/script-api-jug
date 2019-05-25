@@ -5,8 +5,11 @@ import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.eventbus.Message
+import io.vertx.core.json.Json
+import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
 import org.slf4j.LoggerFactory
+import java.lang.RuntimeException
 
 class GithubVerticle : AbstractVerticle() {
     companion object {
@@ -58,13 +61,13 @@ class GithubVerticle : AbstractVerticle() {
         }
     }
 
-    private fun mapFail(message: Message<*>, it: Throwable?): Future<Future<Any>?>? {
-        message.reply(null)
+    private fun mapFail(message: Message<*>, it: Throwable): Future<Future<Any>?>? {
+        message.fail(1, it.message)
         return Future.failedFuture(it)
     }
 
     private fun mapSuccess(it: Any?, message: Message<*>): Future<Any>? {
-        val res = JsonObject.mapFrom(it)
+        val res = Json.encodeToBuffer(it)
         message.reply(res)
         return Future.succeededFuture(it)
     }

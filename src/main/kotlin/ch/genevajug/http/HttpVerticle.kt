@@ -29,22 +29,7 @@ class HttpVerticle() : AbstractVerticle() {
         router.route("/github/user.error").handler {
             throw RuntimeException("Remove Me")
         }
-
-        router.route("/github/user.html")
-                .handler { routingCtx ->
-                    eventBus.send<JsonObject>("github.user", null) {
-                        if (it.succeeded()) {
-                            val body = it.result().body()
-                            routingCtx.put("githubUser", body)
-                            routingCtx.put("name2", "oo2")
-                            LOGGER.info("Github user : {}", body)
-                            routingCtx.next()
-                        } else {
-                            LOGGER.info("Can't get the user: {}", it.cause().message, it.cause())
-                            throw RuntimeException("Can't fetch user")
-                        }
-                    }
-                }
+        
 
         router.get("/*")
                 .handler(StaticHandler.create("static"))

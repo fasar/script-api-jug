@@ -1,5 +1,6 @@
 package ch.genevajug.http
 
+import io.vertx.core.buffer.Buffer
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.json.Json
 import io.vertx.core.json.JsonObject
@@ -12,24 +13,54 @@ object GithubWebApi {
     private val LOGGER = LoggerFactory.getLogger(GithubWebApi::class.java)
 
     fun register(router: Router, eventBus: EventBus) {
-
-        router.route("/api/github/user").handler{ function(eventBus, it) }
+        router.route("/api/github/user").handler{ getUserJson   (eventBus, it) }
+        router.route("/api/github/pages").handler{ getPagesJson   (eventBus, it) }
+        router.route("/github/user.html").handler{ getUserWeb(eventBus, it) }
     }
 
-    private fun function(eventBus: EventBus, ctx: RoutingContext): Unit {
-        eventBus.send<JsonObject>("github.user", null) {
+    private fun getPagesJson(eventBus: EventBus, ctx: RoutingContext) {
+        eventBus.send<Buffer>("github.build-pages-status", null) {
             if (it.succeeded()) {
                 val body = it.result().body()
+                val decodeValue = Json.decodeValue(body)
+
                 ctx.response()
                         .putHeader("content-type", "application/json; charset=utf-8")
-                        .end(Json.encodePrettily(body))
+                        .end(Json.encodePrettily(decodeValue))
+            } else {
+                LOGGER.info("Can't get the pages: {}", it.cause().message, it.cause())
+                throw RuntimeException("Can't fetch pages")
+            }
+        }
+    }
+
+    private fun getUserJson(eventBus: EventBus, ctx: RoutingContext): Unit {
+        eventBus.send<Buffer>("github.user", null) {
+            if (it.succeeded()) {
+                val body : Buffer = it.result().body()
+                val decodeValue = Json.decodeValue(body)
+                ctx.response()
+                        .putHeader("content-type", "application/json; charset=utf-8")
+                        .end(Json.encodePrettily(decodeValue))
             } else {
                 LOGGER.info("Can't get the user: {}", it.cause().message, it.cause())
                 throw RuntimeException("Can't fetch user")
             }
         }
-
     }
 
 
+    private fun getUserWeb(eventBus: EventBus, ctx: RoutingContext): Unit {
+        eventBus.send<Buffer>("github.user", null) {
+            if (it.succeeded()) {
+                val body : Buffer = it.result().body()
+                val decodeValue = Json.decodeValue(body)
+                ctx.put("guser", decodeValue)
+                ctx.next()
+            } else {
+                LOGGER.info("Can't get the user: {}", it.cause().message, it.cause())
+                throw RuntimeException("Can't fetch user")
+            }
+        }
+    }
 }
