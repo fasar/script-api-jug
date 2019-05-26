@@ -3,8 +3,8 @@
  */
 package ch.genevajug
 
-import ch.genevajug.github.services.GithubVerticle
 import ch.genevajug.config.ConfigVerticle
+import ch.genevajug.github.services.GithubVerticle
 import ch.genevajug.http.HttpVerticle
 import io.vertx.config.ConfigRetriever
 import io.vertx.core.Future
@@ -22,7 +22,7 @@ object App {
         System.setProperty("io.vertx.ext.web.TemplateEngine.disableCache", "true")
         masterInit()
 
-        val vertx = Vertx.vertx();
+        val vertx = Vertx.vertx()
 
         vertx.deployVerticle(ConfigVerticle())
 

@@ -40,11 +40,18 @@ dependencies {
     // Use the Kotlin JDK 8 standard library.
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
     implementation("io.quarkus:quarkus-resteasy:0.14.0")
-    implementation("io.vertx:vertx-web-client:3.7.0")
-    implementation("io.vertx:vertx-config:3.7.0")
-    implementation("io.vertx:vertx-web:3.7.0")
-    implementation("io.vertx:vertx-web-templ-thymeleaf:3.7.0")
+    implementation("io.vertx:vertx-web-client:3.7.1")
+    implementation("io.vertx:vertx-config:3.7.1")
+    implementation("io.vertx:vertx-web:3.7.1")
+    implementation("io.vertx:vertx-web-templ-thymeleaf:3.7.1")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
+
+    // Web Jars
+    implementation("org.webjars.npm:vertx3-eventbus-client:3.7.1")
+    implementation("org.webjars:jquery:3.4.1")
+    implementation("org.webjars:bootstrap:4.3.1")
+    implementation("org.webjars.npm:vue:2.6.10")
+    implementation("org.webjars.npm:vue-router:3.0.6")
 
     // Use the Kotlin test library and JUnit integration.
     testImplementation("org.jetbrains.kotlin:kotlin-test")

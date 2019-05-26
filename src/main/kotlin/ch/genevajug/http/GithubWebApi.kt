@@ -3,10 +3,10 @@ package ch.genevajug.http
 import io.vertx.core.buffer.Buffer
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.json.Json
+import io.vertx.core.json.JsonObject
 import io.vertx.ext.web.Router
 import io.vertx.ext.web.RoutingContext
 import org.slf4j.LoggerFactory
-import java.lang.RuntimeException
 
 object GithubWebApi {
     private val LOGGER = LoggerFactory.getLogger(GithubWebApi::class.java)
@@ -15,13 +15,14 @@ object GithubWebApi {
         router.route("/api/github/user").handler{ serveJson("github.user", eventBus, it) }
         router.route("/api/github/pages").handler{ serveJson("github.build-pages-status", eventBus, it) }
         router.route("/github/user.html").handler{ getUserWeb(eventBus, it) }
+        router.route("/index.html").handler{ getUserWeb(eventBus, it) }
     }
 
     private fun serveJson(requestService: String, eventBus: EventBus, ctx: RoutingContext) {
         eventBus.send<Buffer>(requestService, null) {
             if (it.succeeded()) {
                 val body = it.result().body()
-                val decodeValue = Json.decodeValue(body)
+                val decodeValue : JsonObject  = Json.decodeValue(body) as JsonObject
 
                 ctx.response()
                         .putHeader("content-type", "application/json; charset=utf-8")
