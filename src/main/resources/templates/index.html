@@ -56,6 +56,28 @@
         <li>Avatar Url : <span class="message" th:text="${guser.getValue('avatarUrl')}">id</span></li>
     </ul>
 
+    <p>Github Pages</p>
+
+    <table class="table">
+        <caption>Last build for the Site</caption>
+        <thead>
+        <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Pusher</th>
+            <th scope="col">Status</th>
+            <th scope="col">Error</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="page : ${gpages}"  scope="row">
+            <th th:text="${page.getInstant('created_at')}">Time</th>
+            <th th:text="${page.getValue('pusher').getValue('login')}">Pusher</th>
+            <th th:text="${page.getValue('status')}">Status</th>
+            <th th:text="${page.getValue('error')}">Error</th>
+        </tr>
+        </tbody>
+    </table>
+
 
 </div>
 

@@ -33,14 +33,17 @@ class GithubToolsMock(
 
 
     fun getUser(): Future<UserRes> {
+        val future = Future.future<UserRes>()
+
         if (userBuffer == null) {
-            userBuffer = getUserPriv()
+            val user = getUserPriv()
+            vertx!!.setTimer(2000) { future.complete(user) }
         }
-        return userBuffer!!
+        return future
     }
 
 
-    fun getUserPriv(): Future<UserRes> {
+    fun getUserPriv(): UserRes {
         val user = UserRes("Fasar", 23, "nodeId",
                 "http://avatar", "http://gravatar", "http://myurl",
                 "http://htmlurl", "user",
@@ -48,18 +51,18 @@ class GithubToolsMock(
                 false
         )
 
-        val future = Future.future<UserRes>()
-        vertx!!.setTimer(2000) { future.complete(user) }
-        return future
+        return user
     }
 
 
     fun buildPagesStatus(): Future<Array<PagesBuildRes>> {
         var pages = emptyArray<PagesBuildRes>()
-        pages = pages.plus(PagesBuildRes("http://url", StatusRes.queued, ErrorBuildRes(""), "02315", 200, Instant.now(), Instant.now(), getUser().result()))
+        pages = pages.plus(PagesBuildRes("http://url", StatusRes.queued, ErrorBuildRes(""), "02315", 200, Instant.now(), Instant.now(), getUserPriv()))
+        pages = pages.plus(PagesBuildRes("http://url", StatusRes.built, ErrorBuildRes("no error"), "021354", 300, Instant.now(), Instant.now(), getUserPriv()))
+        pages = pages.plus(PagesBuildRes("http://url", StatusRes.errored, ErrorBuildRes("Last error here"), "021354", 300, Instant.now(), Instant.now(), getUserPriv()))
 
         val future = Future.future<Array<PagesBuildRes>>()
-        vertx!!.setTimer(2000) { future.complete(pages) }
+        vertx!!.setTimer(500) { future.complete(pages) }
         return future
 
 
