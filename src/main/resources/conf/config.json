@@ -1,14 +1,19 @@
 {
   "config": {
     "github": {
-      "token": "nop",
-      "owner": "nop",
-      "repo": "nop",
+      "token": "",
+      "owner": "",
+      "repo": "",
 
       "ssl": true,
       "disable_connexion": false,
       "host": "api.github.com",
       "port": 443
+    },
+    "eventbrite" : {
+      "token": "",
+      "organization-id": "",
+      "host": "www.eventbriteapi.com"
     }
   }
 }

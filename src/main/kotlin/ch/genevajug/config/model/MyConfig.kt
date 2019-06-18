@@ -1,10 +1,12 @@
-package ch.genevajug.model
+package ch.genevajug.config.model
 
 data class MyConfig(
-        var github: GithubConfig
+        var github: GithubConfig,
+        var eventbrite: EventbriteConfig
 ) {}
 
-data class GithubConfig (
+
+data class GithubConfig(
         var token: String,
         val owner: String,
         val repo: String,
@@ -12,6 +14,10 @@ data class GithubConfig (
         var port: Int,
         var ssl: Boolean,
         val disableConnexion: Boolean
-){}
+) {}
 
 
+data class EventbriteConfig(
+        var token: String
+) {
+}

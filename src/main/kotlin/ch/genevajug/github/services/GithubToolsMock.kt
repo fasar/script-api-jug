@@ -1,11 +1,11 @@
 package ch.genevajug.github.services
 
 import ch.genevajug.App
+import ch.genevajug.config.model.GithubConfig
 import ch.genevajug.github.model.ErrorBuildRes
 import ch.genevajug.github.model.PagesBuildRes
 import ch.genevajug.github.model.StatusRes
 import ch.genevajug.github.model.UserRes
-import ch.genevajug.model.GithubConfig
 import io.vertx.core.Future
 import io.vertx.core.Vertx
 import io.vertx.ext.web.client.WebClientSession

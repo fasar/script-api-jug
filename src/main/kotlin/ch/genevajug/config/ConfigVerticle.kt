@@ -1,7 +1,6 @@
 package ch.genevajug.config
 
-import ch.genevajug.App
-import ch.genevajug.model.MyConfig
+import ch.genevajug.config.model.MyConfig
 import ch.genevajug.retrieverOptions
 import io.vertx.config.ConfigRetriever
 import io.vertx.core.AbstractVerticle

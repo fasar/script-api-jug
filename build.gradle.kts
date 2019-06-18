@@ -44,7 +44,15 @@ dependencies {
     implementation("io.vertx:vertx-config:3.7.1")
     implementation("io.vertx:vertx-web:3.7.1")
     implementation("io.vertx:vertx-web-templ-thymeleaf:3.7.1")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.+")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.9.9")
+    // Common
+    implementation("org.apache.commons:commons-lang3:3.5")
+    implementation("org.apache.commons:commons-text:1.6")
+    implementation("commons-io:commons-io:2.5")
+
+
+    // Api Web
+    implementation("com.squareup.retrofit2:retrofit:2.5.+")
 
     // Web Jars
     implementation("org.webjars.npm:vertx3-eventbus-client:3.7.1")

@@ -1,15 +1,13 @@
 package ch.genevajug.github.services
 
-import ch.genevajug.model.MyConfig
+import ch.genevajug.config.model.MyConfig
 import io.vertx.core.AbstractVerticle
 import io.vertx.core.Future
 import io.vertx.core.eventbus.EventBus
 import io.vertx.core.eventbus.Message
 import io.vertx.core.json.Json
-import io.vertx.core.json.JsonArray
 import io.vertx.core.json.JsonObject
 import org.slf4j.LoggerFactory
-import java.lang.RuntimeException
 
 class GithubVerticle : AbstractVerticle() {
     companion object {
