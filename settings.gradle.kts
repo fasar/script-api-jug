@@ -9,17 +9,11 @@
 
 rootProject.name = "script-api-jug"
 
+
 pluginManagement {
     repositories {
         jcenter()
         mavenCentral()
         gradlePluginPortal()
-    }
-    resolutionStrategy {
-        eachPlugin {
-            if (requested.id.id == "io.quarkus") {
-                useModule("io.quarkus:quarkus-gradle-plugin:${requested.version}")
-            }
-        }
     }
 }

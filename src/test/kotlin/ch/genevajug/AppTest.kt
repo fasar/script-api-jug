@@ -3,11 +3,12 @@
  */
 package ch.genevajug
 
-import kotlin.test.Test
-import kotlin.test.assertNotNull
+import junit.framework.Assert.assertNotNull
+import org.junit.Test
 
 class AppTest {
-    @Test fun testAppHasAGreeting() {
+    @Test
+    fun testAppHasAGreeting() {
         assertNotNull("", "app should have a greeting")
     }
 }

@@ -3,51 +3,16 @@
  */
 package ch.genevajug
 
-import ch.genevajug.config.ConfigVerticle
-import ch.genevajug.github.services.GithubVerticle
-import ch.genevajug.http.HttpVerticle
-import io.vertx.config.ConfigRetriever
-import io.vertx.core.Future
-import io.vertx.core.Vertx
-import io.vertx.core.json.JsonObject
-import org.slf4j.LoggerFactory.getLogger
+import ch.genevajub.config.model.MyConfig
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
-object App {
-    @JvmStatic
-    private val LOG = getLogger(App::javaClass.name)
+@SpringBootApplication
+class DemoApplication
 
-
-    @JvmStatic
-    fun main(args: Array<String>) {
-        System.setProperty("io.vertx.ext.web.TemplateEngine.disableCache", "true")
-        masterInit()
-
-        val vertx = Vertx.vertx()
-
-        vertx.deployVerticle(ConfigVerticle())
-
-        val eventBus = vertx.eventBus()
-        eventBus.consumer<JsonObject>("init.config").handler {
-            LOG.info("Deploy Config Vertx Done")
-            vertx.deployVerticle(GithubVerticle())
-            vertx.deployVerticle(HttpVerticle())
-        }
-
-        var retriever = ConfigRetriever.create(vertx, retrieverOptions)
-        var configFuture = Future.future<JsonObject>()
-        retriever.getConfig { ar ->
-            if (ar.succeeded()) {
-                configFuture.complete(ar.result())
-            } else {
-                configFuture.fail(ar.cause())
-            }
-        }
-
-
-    }
-
-
-
-
+fun main(args: Array<String>) {
+    val ctx = runApplication<DemoApplication>(*args)
+    val config = ctx.getBean(MyConfig::class.java)
+    println(" My Configuration is : ")
+    println(config.toString())
 }
-
