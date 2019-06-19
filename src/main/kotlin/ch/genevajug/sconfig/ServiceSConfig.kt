@@ -2,6 +2,7 @@ package ch.genevajug.sconfig
 
 import ch.genevajub.config.model.MyConfig
 import ch.genevajug.github.services.GitHubService
+import com.fasterxml.jackson.databind.ObjectMapper
 import feign.Feign
 import feign.Logger
 import feign.jackson.JacksonDecoder
@@ -17,14 +18,15 @@ class ServiceSConfig {
     @Autowired
     lateinit var myConfig: MyConfig
 
+
     @Bean
-    fun gitHubService(): GitHubService {
+    fun gitHubService(mapper: ObjectMapper): GitHubService {
 
         return Feign.builder()
-                .encoder(JacksonEncoder())
-                .decoder(JacksonDecoder())
+                .encoder(JacksonEncoder(mapper))
+                .decoder(JacksonDecoder(mapper))
                 .logger(Slf4jLogger())
-                .logLevel(Logger.Level.BASIC)
+                .logLevel(Logger.Level.FULL)
                 .requestInterceptor { template ->
                     val token = myConfig.github.token
                     // println("Detected Authorization token from environment variable")
