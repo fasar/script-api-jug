@@ -24,8 +24,7 @@ repositories {
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-oauth2-client")
-    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("ch.qos.logback:logback-classic")
     implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
     implementation("org.springframework.boot:spring-boot-starter-web-services")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
@@ -39,11 +38,15 @@ dependencies {
     implementation("io.github.openfeign:feign-jackson:10.2.3")
     implementation("io.github.openfeign:feign-slf4j:10.2.3")
 
+    implementation("org.webjars:webjars-locator:0.36")
+    implementation("org.webjars:jquery:3.4.1")
+    implementation("org.webjars:bootstrap:4.3.1")
+    implementation("org.webjars:popper.js:1.15.0")
+
     developmentOnly("org.springframework.boot:spring-boot-devtools")
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.projectreactor:reactor-test")
-    testImplementation("org.springframework.security:spring-security-test")
     testImplementation("junit:junit")
 }
 

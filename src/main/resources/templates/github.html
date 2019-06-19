@@ -1,12 +1,63 @@
 <!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
       lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <title>Github Info</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/assets/bootstrap/4.3.1/css/bootstrap.css'>
+    <script src="/assets/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <title>Hello, world!</title>
 </head>
+
 <body>
+
+
+<nav th:replace="headers :: navbar"></nav>
+
+
+<div class="container-fluid" role="main">
+    <h1>Github</h1>
+
+    <p>Github User</p>
+    <ul>
+        <li>Login : <span class="message" th:text="${guser.login}">Login</span></li>
+        <li>Id : <span class="message" th:text="${guser.id}">id</span></li>
+        <li>Avatar Url : <span class="message" th:text="${guser.avatarUrl}">id</span></li>
+    </ul>
+
+    <p>Github Pages</p>
+
+    <table class="table">
+        <caption>Last build for the Site</caption>
+        <thead>
+        <tr>
+            <th scope="col">Time</th>
+            <th scope="col">Pusher</th>
+            <th scope="col">Status</th>
+            <th scope="col">Error</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="page : ${gpages}"  scope="row">
+            <th th:text="${page.createdAt}">Time</th>
+            <th th:text="${page.pusher.login}">Pusher</th>
+            <th th:text="${page.status}">Status</th>
+            <th th:text="${page.error.message}">Error</th>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<footer th:replace="headers :: footer">
+    <p>Copyright &copy; JUG Geneva</p>
+</footer>
+
+
 
 </body>
 </html>
