@@ -4,8 +4,10 @@
 package ch.genevajug
 
 import ch.genevajub.config.model.MyConfig
+import ch.genevajug.github.services.GitHubService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
+import java.util.stream.IntStream.range
 
 @SpringBootApplication
 class DemoApplication
@@ -15,4 +17,50 @@ fun main(args: Array<String>) {
     val config = ctx.getBean(MyConfig::class.java)
     println(" My Configuration is : ")
     println(config.toString())
+    var ghconf = config.github
+
+    val gitHubService = ctx.getBean(GitHubService::class.java)
+
+    for (arg in range(0, 100)) {
+        println("Print the info of the current user")
+        try {
+            val res = gitHubService.getUser()
+            println("User is : ${res}")
+        } catch (e: Exception) {
+            System.out.println("error: ${e.message}")
+            e.printStackTrace()
+        }
+
+        println("Show the status of the build pages")
+        try {
+            val res = gitHubService.buildPagesStatus(ghconf.owner, ghconf.repo)
+            println("User is : ${res}")
+        } catch (e: Exception) {
+            System.out.println("error: ${e.message}")
+            e.printStackTrace()
+        }
+
+
+        println("Let's fetch and print a list of the contributors to this org.")
+        try {
+            val res = gitHubService.contributors(ghconf.owner, ghconf.repo)
+            println("List of contribs of ${ghconf.repo} : ${res}")
+        } catch (e: Exception) {
+            System.out.println("error: ${e.message}")
+            e.printStackTrace()
+        }
+
+
+    }
+
+
+    println("Now, let's cause an error.")
+    try {
+        val res = gitHubService.contributors("openfeign", "some-unknown-project")
+        println("List of contribs of some-unknown-project : ${res}")
+
+    } catch (e: Exception) {
+        System.out.println(e.message)
+    }
+
 }
