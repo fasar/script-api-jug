@@ -1,6 +1,7 @@
 package ch.genevajug.eventbrite
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize
 
 
 typealias Decimal = String
@@ -8,6 +9,25 @@ typealias DateTime = String
 typealias LocalDatetime = String
 typealias CountryCode = String
 typealias CurrencyCode = String
+typealias Id = String
+
+
+enum class StatusEnunm {
+    draft, live, started, ended, completed, canceled
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class MultipartText(
+        var http: String?,
+        var text: String?
+) { }
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class DateTimeTz(
+        val timezone: String,
+        val utc: String,
+        val local: String
+) { }
 
 
 open class PaginedObj(pagination: Pagination){
@@ -24,10 +44,34 @@ data class Pagination(
         var has_more_items: Boolean = false
 ){}
 
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class Attendee(
+        var id:Id,
+        var created:DateTime?,
+        var changed:DateTime?,
+        var ticket_class_id:String?,
+        var variant_id:String?,
+        var ticket_class_name:String?,
+        var quantity:String?,
+        var checked_in:Boolean?,
+        var cancelled:Boolean?,
+        var refunded:Boolean?,
+        var status:String?,
+        var order_id:String?,
+        var guestlist_id:String?,
+        var invited_by:String?,
+        var delivery_method:String?,
+        var event_id: String?,
+        var event: Event?
+){}
+
+
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Categories(
         var resource_uri:String,
-        var id:String,
+        var id:Id,
         var name:String,
         var short_name:String,
         var short_name_localized:String
@@ -38,26 +82,18 @@ data class CategoriesList (
         var pagination: Pagination,
         var categories: Array<Categories>
 ) : PaginedObj(pagination) {
-
 }
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-data class EventList (
-        var pagination: Pagination,
-        var events: Array<Event>
-) : PaginedObj(pagination) {
-
-}
-
+@JsonDeserialize()
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Event(
-        var id: String?,
+        var id: Id,
         var name: MultipartText,
-        var summary: String,
-        var description: MultipartText,
+        var summary: String?,
+        var description: MultipartText?,
         var url: String?,
         var start: DateTimeTz,
-        var end: DateTimeTz,
+        var end: DateTimeTz?,
         var created: DateTime?,
         var changed: DateTime?,
         var published: DateTime?,
@@ -78,35 +114,66 @@ data class Event(
         var venue_id: String?,
         var organizer_id: String?,
         var format_id: String?,
-        var ticket_availability: Int?,
+        var ticket_availability: TicketAvailability?,
         var publish_settings: String?
 ) {
 }
 
-enum class StatusEnunm {
-    draft, live, started, ended, completed, canceled
-
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class EventList (
+        var pagination: Pagination,
+        var events: List<Event>
+) : PaginedObj(pagination) {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class MultipartText(
-        var http: String?,
-        var text: String?
-) { }
+data class TicketAvailability (
+    var has_available_tickets: Boolean?,
+    var minimum_ticket_price: PriceTicket?,
+    var maximum_ticket_price: PriceTicket?,
+    var is_sold_out: Boolean?,
+    var start_sales_date: DateTimeTz?,
+    var waitlist_available: Boolean?
+){
+}
+
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class DateTimeTz(
-        val timezone: String,
-        val utc: String,
-        val local: String
-) { }
+data class PriceTicket (
+    var currency: String?,
+    var value: Int?,
+    var major_value: String?,
+    var display: String?
+){
+}
 
+
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class User(
+        var name: String,
+        var first_name: String,
+        var last_name: String,
+        var is_public: Boolean,
+        var image_id: String,
+        var emails: List<Email>
+) {
+}
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class Email(
+        var email: String,
+        var verified: Boolean,
+        var primary: Boolean
+) {
+}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Venue(
+        var id: Id,
         var name: String,
         var address: Address,
-        var id: String,
         var age_restriction: String,
         var capacity: Integer
 ) {

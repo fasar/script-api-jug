@@ -2,6 +2,7 @@ package ch.genevajug.sconfig
 
 import ch.genevajub.config.model.MyConfig
 import ch.genevajug.eventbrite.EventBriteService
+import ch.genevajug.eventbrite.EventBritreJsonDeserializer
 import ch.genevajug.github.services.GitHubService
 import com.fasterxml.jackson.databind.ObjectMapper
 import feign.Feign
@@ -41,9 +42,9 @@ class ServiceSConfig {
 
     @Bean
     fun eventBriteService(mapper: ObjectMapper): EventBriteService {
-        return Feign.builder()
+         return Feign.builder()
                 .encoder(JacksonEncoder(mapper))
-                .decoder(JacksonDecoder(mapper))
+                .decoder(EventBritreJsonDeserializer(mapper))
                 .logger(Slf4jLogger())
                 .logLevel(Logger.Level.FULL)
                 .requestInterceptor { template ->

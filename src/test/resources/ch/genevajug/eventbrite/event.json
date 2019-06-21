@@ -1,0 +1,60 @@
+{
+  "name": {
+    "text": "",
+    "html": ""
+  },
+  "description": {
+    "text": "",
+    "html": ""
+  },
+  "id": "60521208564",
+  "url": "https://www.eventbrite.fr/e/60521208564",
+  "start": {
+    "timezone": "Europe/Zurich",
+    "local": "2019-05-27T19:00:00",
+    "utc": "2019-05-27T17:00:00Z"
+  },
+  "end": {
+    "timezone": "Europe/Zurich",
+    "local": "2019-05-27T22:00:00",
+    "utc": "2019-05-27T20:00:00Z"
+  },
+  "organization_id": "47364797843",
+  "created": "2019-04-17T11:14:33Z",
+  "changed": "2019-04-17T11:14:34Z",
+  "capacity": 0,
+  "capacity_is_custom": false,
+  "status": "draft",
+  "currency": "EUR",
+  "listed": true,
+  "shareable": true,
+  "invite_only": false,
+  "online_event": false,
+  "show_remaining": false,
+  "tx_time_limit": 480,
+  "hide_start_date": false,
+  "hide_end_date": false,
+  "locale": "fr_FR",
+  "is_locked": false,
+  "privacy_setting": "unlocked",
+  "is_series": false,
+  "is_series_parent": false,
+  "inventory_type": "limited",
+  "is_reserved_seating": false,
+  "show_pick_a_seat": false,
+  "show_seatmap_thumbnail": false,
+  "show_colors_in_seatmap_thumbnail": false,
+  "source": "create_2.0",
+  "is_free": true,
+  "version": "3.0.0",
+  "summary": {},
+  "logo_id": {},
+  "organizer_id": "20042584834",
+  "venue_id": {},
+  "category_id": {},
+  "subcategory_id": {},
+  "format_id": {},
+  "resource_uri": "https://www.eventbriteapi.com/v3/events/60521208564/",
+  "is_externally_ticketed": false,
+  "logo": {}
+}
