@@ -2,6 +2,7 @@ package ch.genevajug.sconfig
 
 import ch.genevajub.config.model.MyConfig
 import ch.genevajug.eventbrite.EventBriteService
+import ch.genevajug.eventbrite.EventBriteServiceMock
 import ch.genevajug.eventbrite.EventBritreJsonDeserializer
 import ch.genevajug.github.services.GitHubService
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -40,7 +41,7 @@ class ServiceSConfig {
     }
 
 
-    @Bean
+
     fun eventBriteService(mapper: ObjectMapper): EventBriteService {
          return Feign.builder()
                 .encoder(JacksonEncoder(mapper))
@@ -55,5 +56,10 @@ class ServiceSConfig {
 
                 }
                 .target(EventBriteService::class.java, "https://www.eventbriteapi.com/")
+    }
+
+    @Bean
+    fun eventBriteServiceMock(mapper: ObjectMapper): EventBriteService {
+        return EventBriteServiceMock(mapper)
     }
 }

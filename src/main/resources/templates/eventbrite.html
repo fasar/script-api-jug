@@ -1,0 +1,58 @@
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel='stylesheet' href='/assets/bootstrap/4.3.1/css/bootstrap.css'>
+    <script src="/assets/jquery/3.4.1/jquery.slim.min.js"></script>
+    <script src="/assets/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+    <title>Hello, world!</title>
+</head>
+
+<body>
+
+
+<nav th:replace="headers :: navbar"></nav>
+
+
+<div class="container-fluid" role="main">
+    <h1>Event Brite</h1>
+
+    <p>Events</p>
+
+    <table class="table">
+        <caption>Last Events on EventBrite</caption>
+        <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Date</th>
+            <th scope="col">Status</th>
+            <th scope="col">Name</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="event : ${eevents.events}"  scope="row">
+            <th th:text="${event.id}">Id</th>
+            <th th:text="${event.start.local}">Date</th>
+            <th th:text="${event.status}">Status</th>
+            <th th:text="${event.name.text}">Name</th>
+            <th>Copy, Publish, Edit, ...</th>
+        </tr>
+        </tbody>
+    </table>
+
+
+</div>
+
+
+<footer th:replace="headers :: footer">
+    <p>Copyright &copy; JUG Geneva</p>
+</footer>
+
+
+
+</body>
+</html>

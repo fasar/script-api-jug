@@ -120,7 +120,7 @@ data class Event(
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class EventList (
+data class EventsList (
         var pagination: Pagination,
         var events: List<Event>
 ) : PaginedObj(pagination) {

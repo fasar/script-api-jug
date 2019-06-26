@@ -71,7 +71,7 @@ class CategoriesListTest(
         val resource = this.javaClass.getResource("eventList.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
-        val type = mapper.constructType(EventList::class.java)
+        val type = mapper.constructType(EventsList::class.java)
         val res = decoder.decode(text, type )
         Assert.assertNotNull(res)
         println("Res is : $res")
