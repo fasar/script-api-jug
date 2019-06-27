@@ -1,7 +1,6 @@
 package ch.genevajug.controller
 
 import ch.genevajub.config.model.MyConfig
-import ch.genevajug.eventbrite.EventBriteService
 import ch.genevajug.github.services.GitHubService
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Controller
@@ -14,8 +13,6 @@ class IndexController {
 
     @Autowired
     lateinit var githubService: GitHubService
-    @Autowired
-    lateinit var eventBriteService: EventBriteService
 
     @Autowired
     lateinit var myConfig: MyConfig
@@ -33,12 +30,6 @@ class IndexController {
         return res
     }
 
-    @GetMapping(path = ["/eventbrite"])
-    fun eventbrite(): ModelAndView {
-        val res = ModelAndView("eventbrite")
-        res.model.put("eevents", eventBriteService.listEvent(myConfig.eventbrite.organizationId))
-        return res
-    }
 
 
 }

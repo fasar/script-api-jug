@@ -11,7 +11,13 @@ interface EventBriteService {
 
 
     @Cacheable("eventbrite")
-    @RequestLine("GET /v3/organizations/{organization_id}/events/")
+    @RequestLine("GET /v3/organizations/{organizationId}/events/")
     fun listEvent(organisationId: String): EventsList
 
+    @Cacheable("eventbrite")
+    @RequestLine("GET /v3/events/{eventId}/")
+    fun event(eventId: String): Event
+
+    @RequestLine("GET /v3/events/{eventId}")
+    fun editEvent(eventId:String, event: Event)
 }

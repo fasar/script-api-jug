@@ -2,6 +2,7 @@ package ch.genevajug.eventbrite
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize
+import javax.validation.constraints.NotNull
 
 
 typealias Decimal = String
@@ -18,15 +19,16 @@ enum class StatusEnunm {
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class MultipartText(
-        var http: String?,
+        @NotNull
+        var html: String?,
         var text: String?
 ) {}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class DateTimeTz(
-        val timezone: String,
-        val utc: String,
-        val local: String
+        var timezone: String,
+        var utc: String,
+        var local: String
 ) {}
 
 

@@ -11,12 +11,17 @@ padding:10px;
 
     </style>
 </head>
-<body>
-<h1>My Thymeleaf Error Page</h1>
+<body th:with="httpStatus=${T(org.springframework.http.HttpStatus).valueOf(#response.status)}">
+<h1>Error</h1>
+
 <table>
     <tr>
         <td>Date</td>
         <td th:text="${timestamp}"/>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td th:text="|${httpStatus} - ${httpStatus.reasonPhrase}|"/>
     </tr>
     <tr>
         <td>Path</td>

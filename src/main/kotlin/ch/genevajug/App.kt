@@ -3,7 +3,6 @@
  */
 package ch.genevajug
 
-import ch.genevajug.eventbrite.EventBriteService
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
 
@@ -12,14 +11,5 @@ class DemoApplication
 
 fun main(args: Array<String>) {
     val ctx = runApplication<DemoApplication>(*args)
-
-    val bean = ctx.getBean(EventBriteService::class.java)
-    val category = bean.categoriesList()
-    println("Categories are : ")
-    println(category)
-    for (category in category.categories) {
-        println(" - ${category}" )
-    }
-
 
 }
