@@ -29,17 +29,23 @@
             <th scope="col">Id</th>
             <th scope="col">Date</th>
             <th scope="col">Status</th>
-            <th scope="col">Name</th>
             <th scope="col">Actions</th>
+            <th scope="col">Name</th>
         </tr>
         </thead>
         <tbody>
-        <tr th:each="event : ${eevents.events}"  scope="row">
+        <tr th:each="event, iStat : ${eevents.events}"  scope="row" class="table-striped" th:class="${iStat.even}? 'even' : 'odd'">
             <th th:text="${event.id}">Id</th>
             <th th:text="${event.start.local}">Date</th>
-            <th th:text="${event.status}">Status</th>
+            <th>
+                [[${event.status}]]
+            </th>
+            <th>
+                <a class="button" href="#">Edit</a>
+                <a class="button" href="#">Copy</a>
+                <a th:if='${event.status.toString().equals("draft")}' class="button" href="#">Publish</a>
+            </th>
             <th th:text="${event.name.text}">Name</th>
-            <th>Copy, Publish, Edit, ...</th>
         </tr>
         </tbody>
     </table>

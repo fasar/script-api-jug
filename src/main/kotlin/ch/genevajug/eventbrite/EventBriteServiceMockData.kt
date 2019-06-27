@@ -183,10 +183,10 @@ val categories = """{
 
 val events = """{
   "pagination": {
-    "object_count": 0,
+    "object_count": 2,
     "page_numbner": 0,
-    "page_size": 0,
-    "page_count": 0,
+    "page_size": 30,
+    "page_count": 2,
     "continuation": "dGhpcyBpcyBhIGNvbnRpbnVhdGlvbiB0b2tlbg",
     "has_more_items": false
   },
@@ -216,7 +216,7 @@ val events = """{
       "created": "2017-02-19T20:28:14Z",
       "changed": "2017-02-19T20:28:14Z",
       "published": "2017-02-19T20:28:14Z",
-      "status": "live",
+      "status": "draft",
       "currency": "USD",
       "online_event": false,
       "organization_id": "",
@@ -418,6 +418,65 @@ val events = """{
         ],
         "user_instrument_vault_id": ""
       }
+    },
+    {
+      "name": {
+        "text": "Au delà des brokers: un tour de l'environnement Kafka",
+        "html": "Au delà des brokers: un tour de l&#39;environnement Kafka"
+      },
+      "description": {
+        "text": "Au delà des brokers: un tour de l'environnement Kafka\r\npar Florent Ramière\r\nLieu : Fusion à partir de 18h30\r\nAu delà des brokers: un tour de l'environnement Kafka\r\nApache Kafka ne se résume pas aux brokers, il y a tout un écosystème open-source qui gravite autour. Je vous propose ainsi de découvrir les principaux composants comme Kafka Streams, KSQL, Kafka Connect, Rest proxy, Schema Registry, MirrorMaker, etc. Venez avec vos questions, plus la session sera interactive, meilleure elle sera !\r\n\r\nInformation à propos du lieu :\r\nFusion 50 Avenue de la Praille 1227 Carouge.\r\nTransport public : P+R Etoile\r\nParking : P+R Etoile\r\n\r\nPremiums Sponsors\r\n\r\nSeason Sponsors\r\n",
+        "html": "<H2>Au delà des brokers: un tour de l'environnement Kafka</H2>\r\n<P>par <STRONG><A HREF=\"http://genevajug.ch/jug/speakers.html?speaker=florent_ramiere\" TARGET=\"_blank\" REL=\"nofollow noopener noreferrer\">Florent Ramière</A></STRONG></P>\r\n<P><STRONG>Lieu :</STRONG><EM> Fusion à partir de 18h30</EM></P>\r\n<P>Au delà des brokers: un tour de l'environnement Kafka</P>\r\n<P>Apache Kafka ne se résume pas aux brokers, il y a tout un écosystème open-source qui gravite autour. Je vous propose ainsi de découvrir les principaux composants comme Kafka Streams, KSQL, Kafka Connect, Rest proxy, Schema Registry, MirrorMaker, etc. Venez avec vos questions, plus la session sera interactive, meilleure elle sera !</P>\r\n<P><BR></P>\r\n<P><STRONG>Information à propos du lieu :</STRONG></P>\r\n<P><A HREF=\"https://www.fusion.xyz/fintech/\" TARGET=\"_blank\" REL=\"nofollow noopener noreferrer\">Fusion</A> 50 Avenue de la Praille 1227 Carouge.</P>\r\n<P>Transport public : P+R Etoile</P>\r\n<P>Parking : P+R Etoile</P>\r\n<P><BR></P>\r\n<P STYLE=\"font-family: 'Lucida Grande', lucida-sans, Arial, Helvetica, Tahoma; font-size: 14px; line-height: 16px; margin: 0px; padding: 0px 0px 10px; color: #707070; text-align: center;\"><BR CLASS=\"Apple-interchange-newline\">Premiums Sponsors</P>\r\n<P STYLE=\"font-family: 'Lucida Grande', lucida-sans, Arial, Helvetica, Tahoma; font-size: 14px; line-height: 16px; margin: 0px; padding: 0px 0px 10px; color: #707070; text-align: center;\"><A HREF=\"http://www.oosphere.ch/\" REL=\"nofollow noopener noreferrer\"><IMG STYLE=\"margin-left: 5px; margin-right: 5px;\" ALT=\"\" SRC=\"https://s.evbuc.com/https_proxy?url=http%3A%2F%2Fgenevajug.ch%2Fimages%2Fsponsors%2Flogo-OOsphere.png&sig=ADR2i7_tcpIJSMeZRvGMVSSW5uCk7VkKxg\" HEIGHT=\"115\" WIDTH=\"150\"></IMG></A><A HREF=\"http://www.hortis.ch/\" REL=\"nofollow noopener noreferrer\"><IMG STYLE=\"margin-left: 5px; margin-right: 5px;\" ALT=\"\" SRC=\"https://s.evbuc.com/https_proxy?url=http%3A%2F%2Fgenevajug.ch%2Fimages%2Fsponsors%2Flogo-hortis.png&sig=ADR2i7-dog-P8qN6xYK9RBLFkNAmYKpXGw\" HEIGHT=\"115\" WIDTH=\"150\"></IMG></A></P>\r\n<P STYLE=\"font-family: 'Lucida Grande', lucida-sans, Arial, Helvetica, Tahoma; font-size: 14px; line-height: 16px; margin: 0px; padding: 0px 0px 10px; color: #707070; text-align: center;\">Season Sponsors</P>\r\n<P STYLE=\"font-family: 'Lucida Grande', lucida-sans, Arial, Helvetica, Tahoma; font-size: 14px; line-height: 16px; margin: 0px; padding: 0px 0px 10px; color: #707070; text-align: center;\"><A HREF=\"http://www.kalyss.com/\" REL=\"nofollow noopener noreferrer\"><IMG STYLE=\"margin-left: 5px; margin-right: 5px;\" ALT=\"\" SRC=\"https://s.evbuc.com/https_proxy?url=http%3A%2F%2Fgenevajug.ch%2Fimages%2Fsponsors%2Flogo-kalyss.png&sig=ADR2i79Sk14kgI3ckdvuppVPmGKFlpeYhA\" HEIGHT=\"77\" WIDTH=\"100\"></IMG></A><A HREF=\"http://www.ilemgroup.com/\" REL=\"nofollow noopener noreferrer\"><IMG STYLE=\"margin-left: 5px; margin-right: 5px;\" ALT=\"\" SRC=\"https://s.evbuc.com/https_proxy?url=http%3A%2F%2Fgenevajug.ch%2Fimages%2Fsponsors%2Flogo-Ilem.png&sig=ADR2i7_kiGrGRXStooRHoe2zX71MQ3h32A\" HEIGHT=\"77\" WIDTH=\"100\"></IMG></A><A HREF=\"http://www.soprasteria.ch/fr\" REL=\"nofollow noopener noreferrer\"><IMG STYLE=\"margin-left: 5px; margin-right: 5px;\" ALT=\"\" SRC=\"https://s.evbuc.com/https_proxy?url=http%3A%2F%2Fgenevajug.ch%2Fimages%2Fsponsors%2Flogo-sopra.png&sig=ADR2i78TZ4iJ1BwzflQbdmUaRKcuybOfPw\" HEIGHT=\"77\" WIDTH=\"100\"></IMG></A></P>"
+      },
+      "id": "61862018964",
+      "url": "https://www.eventbrite.fr/e/billets-au-dela-des-brokers-un-tour-de-lenvironnement-kafka-61862018964",
+      "summary": "Au delà des brokers: un tour de l'environnement Kafka\r\npar Florent Ramière\r\nLieu : Fusion à partir de 18h30\r\nAu delà des brokers: un tour de",
+      "start": {
+        "timezone": "Europe/Zurich",
+        "local": "2019-05-28T18:30:00",
+        "utc": "2019-05-28T16:30:00Z"
+      },
+      "end": {
+        "timezone": "Europe/Zurich",
+        "local": "2019-05-28T22:00:00",
+        "utc": "2019-05-28T20:00:00Z"
+      },
+      "organization_id": "21041534876",
+      "created": "2019-05-14T08:57:38Z",
+      "changed": "2019-05-29T03:46:07Z",
+      "published": "2019-05-14T08:57:40Z",
+      "capacity": null,
+      "capacity_is_custom": null,
+      "status": "completed",
+      "currency": "CHF",
+      "listed": true,
+      "shareable": true,
+      "online_event": false,
+      "tx_time_limit": 600,
+      "hide_start_date": false,
+      "hide_end_date": false,
+      "locale": "fr_FR",
+      "is_locked": false,
+      "privacy_setting": "unlocked",
+      "is_series": false,
+      "is_series_parent": false,
+      "inventory_type": "limited",
+      "is_reserved_seating": false,
+      "show_pick_a_seat": false,
+      "show_seatmap_thumbnail": false,
+      "show_colors_in_seatmap_thumbnail": false,
+      "source": "create_2.0",
+      "is_free": true,
+      "version": "3.0.0",
+      "logo_id": null,
+      "organizer_id": "1520696882",
+      "venue_id": "32524029",
+      "category_id": "102",
+      "subcategory_id": null,
+      "format_id": "1",
+      "resource_uri": "https://www.eventbriteapi.com/v3/events/61862018964/",
+      "is_externally_ticketed": false,
+      "logo": null
     }
   ]
 }

@@ -20,65 +20,64 @@ enum class StatusEnunm {
 data class MultipartText(
         var http: String?,
         var text: String?
-) { }
+) {}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class DateTimeTz(
         val timezone: String,
         val utc: String,
         val local: String
-) { }
+) {}
 
 
-open class PaginedObj(pagination: Pagination){
+open class PaginedObj(pagination: Pagination) {
 
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Pagination(
-        var object_count:Int,
-        var page_number:Int,
-        var page_size:Int,
-        var page_count:Int,
-        var continuation:String?,
+        var object_count: Int,
+        var page_number: Int,
+        var page_size: Int,
+        var page_count: Int,
+        var continuation: String?,
         var has_more_items: Boolean = false
-){}
+) {}
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Attendee(
-        var id:Id,
-        var created:DateTime?,
-        var changed:DateTime?,
-        var ticket_class_id:String?,
-        var variant_id:String?,
-        var ticket_class_name:String?,
-        var quantity:String?,
-        var checked_in:Boolean?,
-        var cancelled:Boolean?,
-        var refunded:Boolean?,
-        var status:String?,
-        var order_id:String?,
-        var guestlist_id:String?,
-        var invited_by:String?,
-        var delivery_method:String?,
+        var id: Id,
+        var created: DateTime?,
+        var changed: DateTime?,
+        var ticket_class_id: String?,
+        var variant_id: String?,
+        var ticket_class_name: String?,
+        var quantity: String?,
+        var checked_in: Boolean?,
+        var cancelled: Boolean?,
+        var refunded: Boolean?,
+        var status: String?,
+        var order_id: String?,
+        var guestlist_id: String?,
+        var invited_by: String?,
+        var delivery_method: String?,
         var event_id: String?,
         var event: Event?
-){}
-
+) {}
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Categories(
-        var resource_uri:String,
-        var id:Id,
-        var name:String,
-        var short_name:String,
-        var short_name_localized:String
-){}
+        var resource_uri: String,
+        var id: Id,
+        var name: String,
+        var short_name: String,
+        var short_name_localized: String
+) {}
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class CategoriesList (
+data class CategoriesList(
         var pagination: Pagination,
         var categories: Array<Categories>
 ) : PaginedObj(pagination) {
@@ -120,34 +119,32 @@ data class Event(
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class EventsList (
+data class EventsList(
         var pagination: Pagination,
         var events: List<Event>
 ) : PaginedObj(pagination) {
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class TicketAvailability (
-    var has_available_tickets: Boolean?,
-    var minimum_ticket_price: PriceTicket?,
-    var maximum_ticket_price: PriceTicket?,
-    var is_sold_out: Boolean?,
-    var start_sales_date: DateTimeTz?,
-    var waitlist_available: Boolean?
-){
+data class TicketAvailability(
+        var has_available_tickets: Boolean?,
+        var minimum_ticket_price: PriceTicket?,
+        var maximum_ticket_price: PriceTicket?,
+        var is_sold_out: Boolean?,
+        var start_sales_date: DateTimeTz?,
+        var waitlist_available: Boolean?
+) {
 }
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-data class PriceTicket (
-    var currency: String?,
-    var value: Int?,
-    var major_value: String?,
-    var display: String?
-){
+data class PriceTicket(
+        var currency: String?,
+        var value: Int?,
+        var major_value: String?,
+        var display: String?
+) {
 }
-
-
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
