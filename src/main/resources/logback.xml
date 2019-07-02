@@ -20,8 +20,11 @@
     </appender>
 
 
-    <root level="DEBUG">
+    <root level="INFO">
         <appender-ref ref="STDOUT" />
     </root>
+
+    <logger name="ch.genevajug.eventbrite" level="DEBUG"><appender-ref ref="STDOUT"/></logger>
+    <logger name="feign" level="DEBUG"><appender-ref ref="STDOUT"/></logger>
 
 </configuration>

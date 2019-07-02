@@ -28,7 +28,7 @@ data class MultipartText(
 data class DateTimeTz(
         var timezone: String,
         var utc: String,
-        var local: String
+        var local: String?
 ) {}
 
 
@@ -120,10 +120,43 @@ data class Event(
 ) {
 }
 
+@JsonDeserialize()
+data class MetaPostEvent(
+        var event: PostEvent
+) {
+}
+
+@JsonDeserialize()
+data class PostEvent(
+        var name: MultipartText,            // Fill the HTML field
+        var description: MultipartText,     // Fill the HTML field
+        var start: DateTimeTz,              // Fill timezone and utc fields
+        var end: DateTimeTz,                // Fill timezone and utc fields
+        var hide_start_date: Boolean = false,
+        var hide_end_date: Boolean = false,
+        var currency: String = "EUR",
+        var online_event: Boolean = false
+) {
+}
+
+@JsonDeserialize()
+@JsonIgnoreProperties(ignoreUnknown = false)
+data class EventCopy(
+        var name: String,
+        var start_date: String,
+        var end_date: String,
+        var timezone: String,
+        var summary: String
+) {
+}
+
+
+
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class EventsList(
         var pagination: Pagination,
-        var events: List<Event>
+        var events: MutableList<Event>
 ) : PaginedObj(pagination) {
 }
 
@@ -188,6 +221,17 @@ data class Address(
         var country: String,
         var latitude: String,
         var longitude: String
+) {
+
+}
+
+
+@JsonIgnoreProperties(ignoreUnknown = true)
+data class PublishRes(
+        var published: Boolean?,
+        var unpublished: Boolean?,
+        var error: String?,
+        var error_description: String?
 ) {
 
 }

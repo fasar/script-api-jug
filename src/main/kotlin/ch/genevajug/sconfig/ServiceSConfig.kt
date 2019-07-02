@@ -41,7 +41,7 @@ class ServiceSConfig {
     }
 
 
-
+    @Bean
     fun eventBriteService(mapper: ObjectMapper): EventBriteService {
          return Feign.builder()
                 .encoder(JacksonEncoder(mapper))
@@ -55,10 +55,9 @@ class ServiceSConfig {
                     template.header("Authorization", "Bearer ${token}")
 
                 }
-                .target(EventBriteService::class.java, "https://www.eventbriteapi.com/")
+                .target(EventBriteService::class.java, myConfig.eventbrite.host)
     }
 
-    @Bean
     fun eventBriteServiceMock(mapper: ObjectMapper): EventBriteService {
         return EventBriteServiceMock(mapper)
     }

@@ -152,6 +152,7 @@ public class MyConfig {
     public static class EventbriteConfig {
         String token;
         String organizationId;
+        String host;
 
 
         public String getToken() {
@@ -168,6 +169,14 @@ public class MyConfig {
 
         public void setOrganizationId(String organizationId) {
             this.organizationId = organizationId;
+        }
+
+        public String getHost() {
+            return host;
+        }
+
+        public void setHost(String host) {
+            this.host = host;
         }
     }
 }

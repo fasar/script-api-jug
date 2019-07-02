@@ -42,8 +42,9 @@
             </th>
             <th>
                 <a class="button" href="#" th:href="'/eventbrite/event/' + ${event.id}">Edit</a>
-                <a class="button" href="#">Copy</a>
-                <a th:if='${event.status.toString().equals("draft")}' class="button" href="#">Publish</a>
+                <a class="button" href="#" th:href="'/eventbrite/event/' + ${event.id} + '/copy'">Copy</a>
+                <a th:if='${event.status.toString().equals("draft")}' class="button" href="#" th:href="'/eventbrite/event/' + ${event.id} + '/publish'">Publish</a>
+                <a th:if='${event.status.toString().equals("live")}' class="button" href="#" th:href="'/eventbrite/event/' + ${event.id} + '/unpublish'">Unpublish</a>
             </th>
             <th th:text="${event.name.text}">Name</th>
         </tr>
