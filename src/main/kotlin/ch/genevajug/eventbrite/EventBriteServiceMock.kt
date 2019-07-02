@@ -29,19 +29,6 @@ class EventBriteServiceMock(
         return null
     }
 
-    override fun editEvent(eventId: String, metaEvent: MetaPostEvent) {
-        val currentEventOpt = event(eventId)
-        if(currentEventOpt==null)
-            return
-        val currentEvent = currentEventOpt!!
-        val event = metaEvent.event
-        eventList.events.remove(currentEvent)
-        currentEvent.name = event.name
-        currentEvent.description = event.description
-        currentEvent.start = event.start
-        currentEvent.end = event.end
-        eventList.events.add(currentEvent)
-    }
     override fun editEvent(eventId: String, event: String) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

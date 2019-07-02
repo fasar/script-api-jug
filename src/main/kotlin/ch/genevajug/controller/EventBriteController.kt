@@ -57,11 +57,11 @@ class EventBriteController {
     @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @GetMapping(path = ["/eventbrite/event/{eventId}"])
     fun editEvent(@PathVariable("eventId") eventId: String, model: Model): String {
-        val eventOpt = eventBriteService.event(eventId!!)
+        val eventOpt = eventBriteService.event(eventId)
         if (eventOpt == null) {
             throw RuntimeException("Event id ${eventId} is not found")
         }
-        val event = eventOpt!!
+        val event = eventOpt
 
         val editEvent = EditEventWebEntity.fromEvent(event)
         model.addAttribute("editEventWebEntity", editEvent)

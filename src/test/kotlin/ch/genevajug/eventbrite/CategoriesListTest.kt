@@ -1,11 +1,9 @@
 package ch.genevajug.eventbrite
 
-import ch.genevajub.eventbrite.model.Organizer
 import ch.genevajug.sconfig.JMapperSConfig
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Assert
 import org.junit.Before
-import org.junit.Ignore
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.Autowired
@@ -21,7 +19,7 @@ import java.nio.file.Paths
 class CategoriesListTest(
 ) {
     @Autowired
-    lateinit var mapper:ObjectMapper
+    lateinit var mapper: ObjectMapper
 
     lateinit var decoder: EventBritreJsonDeserializer
 
@@ -37,7 +35,7 @@ class CategoriesListTest(
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
         val type = mapper.constructType(Attendee::class.java)
-        val res = decoder.decode(text, type )
+        val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
         println("Res is : $res")
     }
@@ -49,7 +47,7 @@ class CategoriesListTest(
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
         val type = mapper.constructType(CategoriesList::class.java)
-        val res = decoder.decode(text, type )
+        val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
         println("Res is : $res")
     }
@@ -60,7 +58,7 @@ class CategoriesListTest(
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
         val type = mapper.constructType(Event::class.java)
-        val res = decoder.decode(text, type )
+        val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
         println("Res is : $res")
     }
@@ -72,20 +70,7 @@ class CategoriesListTest(
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
         val type = mapper.constructType(EventsList::class.java)
-        val res = decoder.decode(text, type )
-        Assert.assertNotNull(res)
-        println("Res is : $res")
-    }
-
-
-    @Test
-    @Ignore
-    fun readEventReportReaderTest() {
-        val resource = this.javaClass.getResource("organization.json")
-        val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
-        val type = mapper.constructType(Organizer::class.java)
-        val res = decoder.decode(text, type )
+        val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
         println("Res is : $res")
     }
@@ -97,7 +82,7 @@ class CategoriesListTest(
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
         var text = br.readText()
         val type = mapper.constructType(User::class.java)
-        val res = decoder.decode(text, type )
+        val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
         println("Res is : $res")
     }

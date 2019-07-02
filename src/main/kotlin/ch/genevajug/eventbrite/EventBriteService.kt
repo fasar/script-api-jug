@@ -22,9 +22,6 @@ interface EventBriteService {
     @RequestLine("GET /v3/events/{eventId}/")
     fun event(@Param("eventId") eventId: String): Event?
 
-    @RequestLine("POST /v3/events/{eventId}/")
-    fun editEvent(@Param("eventId") eventId:String, event: MetaPostEvent)
-
     @Headers("Content-Type: application/json")
     @Body("{event}")
     @RequestLine("POST /v3/events/{eventId}/")

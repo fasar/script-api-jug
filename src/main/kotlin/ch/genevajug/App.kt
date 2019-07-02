@@ -10,6 +10,6 @@ import org.springframework.boot.runApplication
 class DemoApplication
 
 fun main(args: Array<String>) {
-    val ctx = runApplication<DemoApplication>(*args)
+    runApplication<DemoApplication>(*args)
 
 }

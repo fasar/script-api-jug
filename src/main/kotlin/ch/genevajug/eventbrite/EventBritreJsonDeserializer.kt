@@ -28,9 +28,9 @@ class EventBritreJsonDeserializer(var mapper: ObjectMapper) : Decoder {
 
     }
 
-    fun decode(text: String, constructType: JavaType): Any {
+    fun decode(json: String, constructType: JavaType): Any {
 
-        val text = text.replace(": {}", ": null")
+        val text = json.replace(": {}", ": null")
 
         try {
             // Read the first byte to see if we have any data

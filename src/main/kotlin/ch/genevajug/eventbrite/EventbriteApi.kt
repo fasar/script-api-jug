@@ -33,7 +33,6 @@ data class DateTimeTz(
 
 
 open class PaginedObj(pagination: Pagination) {
-
 }
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -121,25 +120,6 @@ data class Event(
 }
 
 @JsonDeserialize()
-data class MetaPostEvent(
-        var event: PostEvent
-) {
-}
-
-@JsonDeserialize()
-data class PostEvent(
-        var name: MultipartText,            // Fill the HTML field
-        var description: MultipartText,     // Fill the HTML field
-        var start: DateTimeTz,              // Fill timezone and utc fields
-        var end: DateTimeTz,                // Fill timezone and utc fields
-        var hide_start_date: Boolean = false,
-        var hide_end_date: Boolean = false,
-        var currency: String = "EUR",
-        var online_event: Boolean = false
-) {
-}
-
-@JsonDeserialize()
 @JsonIgnoreProperties(ignoreUnknown = false)
 data class EventCopy(
         var name: String,
@@ -207,7 +187,7 @@ data class Venue(
         var name: String,
         var address: Address,
         var age_restriction: String,
-        var capacity: Integer
+        var capacity: Int
 ) {
 }
 
