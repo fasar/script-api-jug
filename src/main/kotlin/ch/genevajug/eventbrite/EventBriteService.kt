@@ -13,12 +13,9 @@ interface EventBriteService {
     @RequestLine("GET /v3/categories/")
     fun categoriesList(): CategoriesList
 
-
-    @Cacheable("eventbriteList")
     @RequestLine("GET /v3/organizations/{organisationId}/events/")
     fun listEvent(@Param("organisationId") organisationId: String): EventsList
 
-    @Cacheable("eventbriteEvents")
     @RequestLine("GET /v3/events/{eventId}/")
     fun event(@Param("eventId") eventId: String): Event?
 

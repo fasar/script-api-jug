@@ -5,7 +5,6 @@ import ch.genevajug.eventbrite.Event
 import ch.genevajug.eventbrite.EventBriteService
 import ch.genevajug.eventbrite.EventCopy
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.CacheEvict
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
@@ -36,7 +35,6 @@ class EventBriteController {
     }
 
 
-    @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @GetMapping(path = ["/eventbrite/event/{eventId}/copy"])
     fun copyEvent(@PathVariable("eventId") eventId: String): String {
         val start = ZonedDateTime.now().truncatedTo(ChronoUnit.DAYS).plusHours(18).plusMinutes(30)
@@ -49,7 +47,6 @@ class EventBriteController {
     }
 
 
-    @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @GetMapping(path = ["/eventbrite/event/{eventId}"])
     fun editEvent(@PathVariable("eventId") eventId: String, model: Model): String {
         val eventOpt = eventBriteService.event(eventId)
@@ -62,7 +59,6 @@ class EventBriteController {
         return "eb-edit"
     }
 
-    @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @PostMapping(path = ["/eventbrite/event/{eventId}"])
     fun postEditedEvent(@PathVariable("eventId") eventId: String, @Valid editedEventWE: EditEventWebEntity, result: BindingResult, model: Model): String {
         if (result.hasErrors()) {
@@ -101,7 +97,6 @@ class EventBriteController {
     }
 
 
-    @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @GetMapping(path = ["/eventbrite/event/{eventId}/publish"])
     fun publish(@PathVariable("eventId") eventId: String): String {
         val publish = eventBriteService.publish(eventId)
@@ -112,7 +107,6 @@ class EventBriteController {
         return "redirect:/eventbrite"
     }
 
-    @CacheEvict(value = ["eventbriteEvents", "eventbriteList"], allEntries = true)
     @GetMapping(path = ["/eventbrite/event/{eventId}/unpublish"])
     fun unpublish(@PathVariable("eventId") eventId: String): String {
         val publish = eventBriteService.unpublish(eventId)
