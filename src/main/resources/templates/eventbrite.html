@@ -41,6 +41,8 @@
                 [[${event.status}]]
             </th>
             <th>
+                <a class="button" href="#" th:href="'https://www.eventbrite.fr/edit?eid='+ ${event.id} + '#privacy_header'">EB link</a>
+                -
                 <a class="button" href="#" th:href="'/eventbrite/event/' + ${event.id}">Edit</a>
                 <a class="button" href="#" th:href="'/eventbrite/event/' + ${event.id} + '/copy'">Copy</a>
                 <a th:if='${event.status.toString().equals("draft")}' class="button" href="#" th:href="'/eventbrite/event/' + ${event.id} + '/publish'">Publish</a>
