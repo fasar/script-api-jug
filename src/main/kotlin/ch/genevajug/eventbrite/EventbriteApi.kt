@@ -22,18 +22,17 @@ data class MultipartText(
         @NotNull
         var html: String?,
         var text: String?
-) {}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class DateTimeTz(
         var timezone: String,
         var utc: String,
         var local: String?
-) {}
+)
 
 
-open class PaginedObj(pagination: Pagination) {
-}
+open class PaginedObj(pagination: Pagination)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Pagination(
@@ -43,7 +42,7 @@ data class Pagination(
         var page_count: Int,
         var continuation: String?,
         var has_more_items: Boolean = false
-) {}
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -65,7 +64,7 @@ data class Attendee(
         var delivery_method: String?,
         var event_id: String?,
         var event: Event?
-) {}
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -75,16 +74,15 @@ data class Categories(
         var name: String,
         var short_name: String,
         var short_name_localized: String
-) {}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class CategoriesList(
         var pagination: Pagination,
         var categories: Array<Categories>
-) : PaginedObj(pagination) {
-}
+) : PaginedObj(pagination)
 
-@JsonDeserialize()
+@JsonDeserialize
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Event(
         var id: Id,
@@ -116,10 +114,9 @@ data class Event(
         var format_id: String?,
         var ticket_availability: TicketAvailability?,
         var publish_settings: String?
-) {
-}
+)
 
-@JsonDeserialize()
+@JsonDeserialize
 @JsonIgnoreProperties(ignoreUnknown = false)
 data class EventCopy(
         var name: String,
@@ -127,18 +124,14 @@ data class EventCopy(
         var end_date: String,
         var timezone: String,
         var summary: String
-) {
-}
-
-
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class EventsList(
         var pagination: Pagination,
         var events: MutableList<Event>
-) : PaginedObj(pagination) {
-}
+) : PaginedObj(pagination)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class TicketAvailability(
@@ -148,8 +141,7 @@ data class TicketAvailability(
         var is_sold_out: Boolean?,
         var start_sales_date: DateTimeTz?,
         var waitlist_available: Boolean?
-) {
-}
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -158,8 +150,7 @@ data class PriceTicket(
         var value: Int?,
         var major_value: String?,
         var display: String?
-) {
-}
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -170,16 +161,14 @@ data class User(
         var is_public: Boolean,
         var image_id: String,
         var emails: List<Email>
-) {
-}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Email(
         var email: String,
         var verified: Boolean,
         var primary: Boolean
-) {
-}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Venue(
@@ -188,8 +177,7 @@ data class Venue(
         var address: Address,
         var age_restriction: String,
         var capacity: Int
-) {
-}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class Address(
@@ -201,9 +189,7 @@ data class Address(
         var country: String,
         var latitude: String,
         var longitude: String
-) {
-
-}
+)
 
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -212,6 +198,4 @@ data class PublishRes(
         var unpublished: Boolean?,
         var error: String?,
         var error_description: String?
-) {
-
-}
+)

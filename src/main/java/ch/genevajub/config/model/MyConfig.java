@@ -9,8 +9,8 @@ import java.util.Objects;
 @ConfigurationProperties(prefix = "config")
 public class MyConfig {
 
-    GithubConfig github;
-    EventbriteConfig eventbrite;
+    private GithubConfig github;
+    private EventbriteConfig eventbrite;
 
     public GithubConfig getGithub() {
         return github;

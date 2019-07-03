@@ -16,8 +16,7 @@ import java.nio.file.Paths
 @RunWith(SpringRunner::class)
 @Import(JMapperSConfig::class)
 @Component
-class CategoriesListTest(
-) {
+class CategoriesListTest {
     @Autowired
     lateinit var mapper: ObjectMapper
 
@@ -33,7 +32,7 @@ class CategoriesListTest(
     fun readAttendeeReaderTest() {
         val resource = this.javaClass.getResource("attendee.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
+        val text = br.readText()
         val type = mapper.constructType(Attendee::class.java)
         val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
@@ -45,7 +44,7 @@ class CategoriesListTest(
     fun readCategoriesListReaderTest() {
         val resource = this.javaClass.getResource("categoriesList.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
+        val text = br.readText()
         val type = mapper.constructType(CategoriesList::class.java)
         val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
@@ -56,7 +55,7 @@ class CategoriesListTest(
     fun readEventReaderTest() {
         val resource = this.javaClass.getResource("event.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
+        val text = br.readText()
         val type = mapper.constructType(Event::class.java)
         val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
@@ -68,7 +67,7 @@ class CategoriesListTest(
     fun readEventListReaderTest() {
         val resource = this.javaClass.getResource("eventList.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
+        val text = br.readText()
         val type = mapper.constructType(EventsList::class.java)
         val res = decoder.decode(text, type)
         Assert.assertNotNull(res)
@@ -80,7 +79,7 @@ class CategoriesListTest(
     fun readUserReaderTest() {
         val resource = this.javaClass.getResource("user.json")
         val br = Files.newBufferedReader(Paths.get(resource.toURI()))
-        var text = br.readText()
+        val text = br.readText()
         val type = mapper.constructType(User::class.java)
         val res = decoder.decode(text, type)
         Assert.assertNotNull(res)

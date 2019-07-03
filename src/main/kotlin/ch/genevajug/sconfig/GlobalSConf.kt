@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import
 
 @Import(value = [MyConfig::class])
-@Configuration()
+@Configuration
 @EnableConfigurationProperties
 @EnableCaching
 class GlobalSConf

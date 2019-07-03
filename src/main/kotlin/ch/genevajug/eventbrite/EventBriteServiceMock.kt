@@ -3,10 +3,10 @@ package ch.genevajug.eventbrite
 import com.fasterxml.jackson.databind.ObjectMapper
 
 class EventBriteServiceMock(
-        var mapper: ObjectMapper
+        private var mapper: ObjectMapper
 ) : EventBriteService {
 
-    var eventList:EventsList;
+    private var eventList:EventsList
 
     init {
         eventList = mapper.readValue(events, EventsList::class.java)
@@ -22,7 +22,7 @@ class EventBriteServiceMock(
 
     override fun event(eventId: String): Event? {
         for (event in eventList.events) {
-            if (event.id.equals(eventId)) {
+            if (event.id == eventId) {
                 return event
             }
         }

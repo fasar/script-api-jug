@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils
 import java.io.IOException
 import java.lang.reflect.Type
 
-class EventBritreJsonDeserializer(var mapper: ObjectMapper) : Decoder {
+class EventBritreJsonDeserializer(private var mapper: ObjectMapper) : Decoder {
 
     @Throws(IOException::class)
     override fun decode(response: Response, type: Type): Any? {
@@ -18,8 +18,8 @@ class EventBritreJsonDeserializer(var mapper: ObjectMapper) : Decoder {
             return Util.emptyValueOf(type)
         if (response.body() == null)
             return null
-        var reader = response.body().asReader()
-        var text = reader.readText()
+        val reader = response.body().asReader()
+        val text = reader.readText()
         if (StringUtils.isEmpty(text)){
             return null
         }

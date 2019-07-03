@@ -21,8 +21,8 @@ class JMapperSConfig {
                 .registerModule(JavaTimeModule())
                 .registerModule(Jdk8Module())
 
-        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
-        mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false)
+        mapper.propertyNamingStrategy = PropertyNamingStrategy.SNAKE_CASE
         return mapper
     }
 }

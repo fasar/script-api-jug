@@ -10,7 +10,7 @@ enum class StatusRes {
 
 data class ErrorBuildRes (
     var message: String?
-){}
+)
 
 data class PagesBuildRes(
         var url: String,
@@ -21,7 +21,7 @@ data class PagesBuildRes(
         @JsonProperty("created_at")  var createdAt: Instant,
         @JsonProperty("updated_at")  var updatedAt: Instant,
         var pusher: UserRes
-){}
+)
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 data class UserRes (
@@ -35,14 +35,12 @@ data class UserRes (
         var type: String,
         @JsonProperty("following_url") var followingUrl: String,
         @JsonProperty("site_admin") var siteAdmin: Boolean = false
-){}
+)
 
 data class Repository (
         var name: String? = null
-){
-}
+)
 
 data class Contributor(
         var login: String? = null
-) {
-}
+)

@@ -17,7 +17,6 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import javax.validation.Valid
-import javax.validation.Validator
 import javax.validation.constraints.NotNull
 import javax.validation.constraints.Pattern
 import javax.validation.constraints.Size
@@ -29,10 +28,6 @@ class EventBriteController {
 
     @Autowired
     lateinit var myConfig: MyConfig
-
-
-    @Autowired
-    lateinit var validator: Validator
 
     @GetMapping(path = ["/eventbrite"])
     fun eventbrite(model: Model): String {
@@ -59,11 +54,10 @@ class EventBriteController {
     fun editEvent(@PathVariable("eventId") eventId: String, model: Model): String {
         val eventOpt = eventBriteService.event(eventId)
         if (eventOpt == null) {
-            throw RuntimeException("Event id ${eventId} is not found")
+            throw RuntimeException("Event id $eventId is not found")
         }
-        val event = eventOpt
 
-        val editEvent = EditEventWebEntity.fromEvent(event)
+        val editEvent = EditEventWebEntity.fromEvent(eventOpt)
         model.addAttribute("editEventWebEntity", editEvent)
         return "eb-edit"
     }

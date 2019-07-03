@@ -34,7 +34,7 @@ class ServiceSConfig {
                     val token = myConfig.github.token
                     // println("Detected Authorization token from environment variable")
                     template.header("Accept", "application/vnd.github.v3+json")
-                    template.header("Authorization", "token ${token}")
+                    template.header("Authorization", "token $token")
 
                 }
                 .target(GitHubService::class.java, "https://api.github.com")
@@ -52,7 +52,7 @@ class ServiceSConfig {
                     val token = myConfig.eventbrite.token
                     // println("Detected Authorization token from environment variable")
                     template.header("Accept", "application/json")
-                    template.header("Authorization", "Bearer ${token}")
+                    template.header("Authorization", "Bearer $token")
 
                 }
                 .target(EventBriteService::class.java, myConfig.eventbrite.host)

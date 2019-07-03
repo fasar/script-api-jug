@@ -1,6 +1,6 @@
 package ch.genevajug.eventbrite
 
-val categories = """{
+const val categories = """{
   "locale": "en_US",
   "pagination": {
     "object_count": 21,
@@ -181,7 +181,7 @@ val categories = """{
   ]
 }"""
 
-val events = """{
+const val events = """{
   "pagination": {
     "object_count": 2,
     "page_numbner": 0,
